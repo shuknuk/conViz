@@ -1,0 +1,72 @@
+// GUI module - JavaFX desktop application for visualizing traces
+
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
+}
+
+dependencies {
+    // Shared module
+    implementation project(':shared')
+    
+    // JavaFX (handled by plugin, but explicit for clarity)
+    implementation "org.openjfx:javafx-controls:${javafxVersion}"
+    implementation "org.openjfx:javafx-fxml:${javafxVersion}"
+    implementation "org.openjfx:javafx-swing:${javafxVersion}"
+    
+    // UI utilities
+    implementation 'org.controlsfx:controlsfx:11.1.2'
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.3.1'
+    implementation 'org.kordamp.ikonli:ikonli-materialdesign2-pack:12.3.1'
+    
+    // File handling
+    implementation 'commons-io:commons-io:2.11.0'
+    
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+}
+
+// JavaFX plugin configuration
+javafx {
+    version = javafxVersion
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
+}
+
+// Application configuration
+application {
+    mainModule = 'com.traceview.gui'
+    mainClass = 'com.traceview.gui.TraceViewApplication'
+}
+
+// JVM arguments for running the application
+run {
+    jvmArgs = [
+        '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+        '--add-opens', 'javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED',
+        '--add-opens', 'javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED',
+        '--add-opens', 'javafx.base/com.sun.javafx.binding=ALL-UNNAMED',
+        '--add-opens', 'javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED'
+    ]
+}
+
+// Custom task to package the application
+task packageApp(type: Jar) {
+    archiveBaseName = 'traceview-gui'
+    archiveVersion = project.version
+    
+    manifest {
+        attributes(
+            'Main-Class': 'com.traceview.gui.TraceViewApplication',
+            'Implementation-Title': 'TraceView GUI',
+            'Implementation-Version': project.version
+        )
+    }
+    
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    with jar
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

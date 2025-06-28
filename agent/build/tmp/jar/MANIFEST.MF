@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Agent-Class: com.traceview.agent.TraceAgent
+Premain-Class: com.traceview.agent.TraceAgent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Implementation-Title: TraceView Trace Agent
+Implementation-Version: 1.0.0
+

@@ -1,0 +1,33 @@
+<!-- Root layout for TraceView GUI -->
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.traceview.gui.TraceViewController">
+    <!-- Top: Header Bar -->
+    <top>
+        <HBox styleClass="header-bar">
+            <Label fx:id="fileNameLabel" text="" styleClass="file-name-label"/>
+            <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
+            <Button fx:id="themeToggleButton" onAction="#toggleTheme" text="☀️" styleClass="theme-toggle-button"/>
+        </HBox>
+    </top>
+
+    <!-- Center: Timeline -->
+    <center>
+        <!-- Placeholder for timeline -->
+        <VBox fx:id="timelineContainer" styleClass="timeline-container">
+            <Label text="Timeline goes here" styleClass="timeline-placeholder-label"/>
+        </VBox>
+    </center>
+
+    <!-- Right: Context Panel (Initially Hidden) -->
+    <right>
+        <VBox fx:id="contextPanel" styleClass="context-panel" visible="false">
+            <Label text="State: " styleClass="context-label"/>
+            <Label fx:id="stateDetail" text="" styleClass="context-detail"/>
+            <Label text="Duration: " styleClass="context-label"/>
+            <Label fx:id="durationDetail" text="" styleClass="context-detail"/>
+            <Label text="Waiting For: " styleClass="context-label"/>
+            <Label fx:id="waitingDetail" text="" styleClass="context-detail"/>
+            <Label text="Stack Trace:" styleClass="context-label"/>
+            <TextArea fx:id="stackTraceArea" editable="false" wrapText="true"/>
+        </VBox>
+    </right>
+</BorderPane>

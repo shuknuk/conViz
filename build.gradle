@@ -1,0 +1,75 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+// Configure all subprojects
+allprojects {
+    group = 'com.traceview'
+    version = '1.0.0'
+    
+    repositories {
+        mavenCentral()
+    }
+}
+
+// Configure Java subprojects
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    
+    dependencies {
+        // Common test dependencies
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+        testImplementation 'org.mockito:mockito-core:5.1.1'
+        testImplementation 'org.assertj:assertj-core:3.24.2'
+    }
+    
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+    
+    // Common compiler options
+    compileJava {
+        options.encoding = 'UTF-8'
+        options.compilerArgs += ['-Xlint:unchecked', '-Xlint:deprecation']
+    }
+    
+    compileTestJava {
+        options.encoding = 'UTF-8'
+    }
+}
+
+// Root project configuration
+wrapper {
+    gradleVersion = '8.4'
+}
+
+// Default task
+defaultTasks 'build'
+
+// Task to run the GUI application
+task runGui(type: GradleBuild) {
+    dir = 'gui'
+    tasks = ['run']
+}
+
+// Task to package the agent
+task packageAgent(type: GradleBuild) {
+    dir = 'agent'
+    tasks = ['jar']
+}
+
+// Task to run examples
+task runExamples(type: GradleBuild) {
+    dir = 'examples'
+    tasks = ['run']
+}

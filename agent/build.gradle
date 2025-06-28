@@ -1,0 +1,62 @@
+// Agent module - Java agent for collecting concurrency events
+
+dependencies {
+    // Shared module
+    implementation project(':shared')
+    
+    // Java instrumentation
+    implementation 'net.bytebuddy:byte-buddy:1.14.5'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.14.5'
+    
+    // High-performance collections
+    implementation 'org.eclipse.collections:eclipse-collections:11.1.0'
+    implementation 'org.eclipse.collections:eclipse-collections-api:11.1.0'
+    
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+}
+
+// Configure JAR for Java agent
+jar {
+    archiveBaseName = 'trace-agent'
+    archiveVersion = project.version
+    
+    manifest {
+        attributes(
+            'Agent-Class': 'com.traceview.agent.TraceAgent',
+            'Premain-Class': 'com.traceview.agent.TraceAgent',
+            'Can-Redefine-Classes': 'true',
+            'Can-Retransform-Classes': 'true',
+            'Implementation-Title': 'TraceView Trace Agent',
+            'Implementation-Version': project.version
+        )
+    }
+    
+    // Include dependencies in the agent JAR
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    
+    // Ensure shared module is built first
+    dependsOn ':shared:jar'
+}
+
+// Task to create a minimal agent JAR without dependencies
+task agentJarMinimal(type: Jar) {
+    archiveBaseName = 'trace-agent-minimal'
+    archiveVersion = project.version
+    
+    from sourceSets.main.output
+    
+    manifest {
+        attributes(
+            'Agent-Class': 'com.traceview.agent.TraceAgent',
+            'Premain-Class': 'com.traceview.agent.TraceAgent',
+            'Can-Redefine-Classes': 'true',
+            'Can-Retransform-Classes': 'true'
+        )
+    }
+}

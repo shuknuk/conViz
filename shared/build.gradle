@@ -1,0 +1,18 @@
+// Shared module - Common classes and trace format definitions
+
+dependencies {
+    // JSON processing for configuration and metadata
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+    
+    // Utility libraries
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.google.guava:guava:32.1.1-jre'
+}
+
+// Make this module available to other modules
+jar {
+    archiveBaseName = 'traceview-shared'
+    archiveVersion = project.version
+}

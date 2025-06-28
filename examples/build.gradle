@@ -1,0 +1,51 @@
+// Examples module - Sample applications for testing the trace agent
+
+plugins {
+    id 'application'
+}
+
+dependencies {
+    // Agent module for instrumentation
+    implementation project(':agent')
+    implementation project(':shared')
+}
+
+// Application configuration
+application {
+    mainClass = 'com.traceview.examples.SimpleMultiThreadedApp'
+}
+
+// Task to run different examples
+task runDeadlockExample(type: JavaExec) {
+    group = 'examples'
+    description = 'Run deadlock example application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.traceview.examples.DeadlockExample'
+    
+    // Optional: Add trace agent
+    if (project.hasProperty('withAgent')) {
+        jvmArgs = ['-javaagent:../agent/build/libs/trace-agent-1.0.0.jar=output=deadlock-trace.tview']
+    }
+}
+
+task runProducerConsumerExample(type: JavaExec) {
+    group = 'examples'
+    description = 'Run producer-consumer example application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.traceview.examples.ProducerConsumerExample'
+    
+    if (project.hasProperty('withAgent')) {
+        jvmArgs = ['-javaagent:../agent/build/libs/trace-agent-1.0.0.jar=output=producer-consumer-trace.tview']
+    }
+}
+
+task runContentionExample(type: JavaExec) {
+    group = 'examples'
+    description = 'Run lock contention example application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.traceview.examples.ContentionExample'
+    
+    if (project.hasProperty('withAgent')) {
+        jvmArgs = ['-javaagent:../agent/build/libs/trace-agent-1.0.0.jar=output=contention-trace.tview']
+    }
+}

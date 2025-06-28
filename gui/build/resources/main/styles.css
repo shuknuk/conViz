@@ -1,0 +1,261 @@
+/* TraceView Application Styles */
+
+/* Root styling and theme variables */
+.root {
+    -fx-font-family: "Inter", "Segoe UI", system;
+    -fx-font-size: 13px;
+}
+
+/* Light theme (default) */
+.root.light-theme {
+    -fx-base: #F7F7F7;
+    -fx-background: #F7F7F7;
+    -fx-control-inner-background: #FFFFFF;
+    -fx-text-fill: #2F2F2F;
+    -fx-accent: #4A90E2;
+    
+    /* Custom color variables for light mode */
+    -fx-executing-color: #2E7D32;     /* Forest Green */
+    -fx-blocked-sync-color: #C62828;  /* Muted Terracotta Red */
+    -fx-blocked-io-color: #1976D2;    /* Deep Sky Blue */
+    -fx-sleeping-color: #757575;      /* Gray */
+}
+
+/* Dark theme */
+.root.dark-theme {
+    -fx-base: #1A1A1A;
+    -fx-background: #1A1A1A;
+    -fx-control-inner-background: #2A2A2A;
+    -fx-text-fill: #EAEAEA;
+    -fx-accent: #64B5F6;
+    
+    /* Custom color variables for dark mode */
+    -fx-executing-color: #00E676;     /* Electric Green */
+    -fx-blocked-sync-color: #F44336;  /* Crimson Red */
+    -fx-blocked-io-color: #2196F3;    /* Sapphire Blue */
+    -fx-sleeping-color: #9E9E9E;      /* Light Gray */
+}
+
+/* Welcome View Styles */
+.welcome-container {
+    -fx-alignment: center;
+    -fx-spacing: 30px;
+    -fx-padding: 40px;
+    -fx-background-color: -fx-background;
+}
+
+.welcome-icon {
+    -fx-font-size: 64px;
+    -fx-text-fill: -fx-accent;
+}
+
+.welcome-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+}
+
+.welcome-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: derive(-fx-text-fill, -20%);
+}
+
+.open-file-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 12px 24px;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
+}
+
+.open-file-button:hover {
+    -fx-background-color: derive(-fx-accent, 10%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 3);
+}
+
+.open-file-button:pressed {
+    -fx-background-color: derive(-fx-accent, -10%);
+}
+
+/* Header Bar Styles */
+.header-bar {
+    -fx-padding: 12px 16px;
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+    -fx-background-color: derive(-fx-background, -3%);
+    -fx-border-color: derive(-fx-background, -10%);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.file-name-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+}
+
+.theme-toggle-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: inherit;
+    -fx-font-size: 16px;
+    -fx-padding: 6px 8px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.theme-toggle-button:hover {
+    -fx-background-color: derive(-fx-background, -5%);
+}
+
+.theme-toggle-button:pressed {
+    -fx-background-color: derive(-fx-background, -10%);
+}
+
+/* Timeline Container Styles */
+.timeline-container {
+    -fx-background-color: -fx-background;
+    -fx-padding: 0;
+}
+
+.timeline-placeholder-label {
+    -fx-alignment: center;
+    -fx-font-size: 18px;
+    -fx-text-fill: derive(-fx-text-fill, -30%);
+    -fx-padding: 100px;
+}
+
+/* Context Panel Styles */
+.context-panel {
+    -fx-background-color: derive(-fx-background, 5%);
+    -fx-padding: 20px;
+    -fx-spacing: 12px;
+    -fx-min-width: 280px;
+    -fx-max-width: 320px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, -5, 0);
+    -fx-background-radius: 0 0 0 8px;
+}
+
+.context-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-text-fill: derive(-fx-text-fill, -20%);
+    -fx-text-transform: uppercase;
+}
+
+.context-detail {
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-text-fill: -fx-text-fill;
+    -fx-padding: 0 0 8px 0;
+}
+
+.context-panel .text-area {
+    -fx-background-color: derive(-fx-background, -5%);
+    -fx-control-inner-background: derive(-fx-background, -5%);
+    -fx-text-fill: -fx-text-fill;
+    -fx-font-family: "Monaco", "Consolas", monospace;
+    -fx-font-size: 11px;
+    -fx-background-radius: 6px;
+    -fx-border-color: derive(-fx-background, -15%);
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-pref-height: 150px;
+}
+
+.context-panel .text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.context-panel .text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* Drag and Drop States */
+.drop-target {
+    -fx-border-color: -fx-accent;
+    -fx-border-width: 2px;
+    -fx-border-style: dashed;
+    -fx-background-color: derive(-fx-accent, 90%);
+}
+
+/* Timeline Thread Lanes */
+.thread-lane {
+    -fx-background-color: transparent;
+    -fx-padding: 2px 0;
+    -fx-border-color: derive(-fx-background, -10%);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.thread-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+    -fx-text-fill: -fx-text-fill;
+    -fx-padding: 8px 12px;
+    -fx-min-width: 120px;
+    -fx-alignment: center-left;
+    -fx-background-color: derive(-fx-background, -2%);
+    -fx-border-color: derive(-fx-background, -10%);
+    -fx-border-width: 0 1px 0 0;
+}
+
+/* State Visualization */
+.state-segment {
+    -fx-background-radius: 3px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+.state-segment:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+}
+
+.state-executing {
+    -fx-background-color: -fx-executing-color;
+}
+
+.state-blocked-sync {
+    -fx-background-color: -fx-blocked-sync-color;
+}
+
+.state-blocked-io {
+    -fx-background-color: -fx-blocked-io-color;
+}
+
+.state-sleeping {
+    -fx-background-color: -fx-sleeping-color;
+}
+
+/* Animations and Transitions */
+.context-panel {
+    -fx-transition: -fx-translate-x 0.3s ease-out;
+}
+
+.welcome-container {
+    -fx-transition: -fx-opacity 0.4s ease-out;
+}
+
+/* Scrollbars */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .track {
+    -fx-background-color: derive(-fx-background, -8%);
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(-fx-background, -25%);
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: derive(-fx-background, -35%);
+}
+
+.scroll-bar .thumb:pressed {
+    -fx-background-color: derive(-fx-background, -45%);
+}

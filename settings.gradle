@@ -1,0 +1,12 @@
+rootProject.name = 'traceview'
+
+include ':agent'
+include ':gui'
+include ':shared'
+include ':examples'
+
+// Project descriptions
+project(':agent').projectDir = file('agent')
+project(':gui').projectDir = file('gui')
+project(':shared').projectDir = file('shared')
+project(':examples').projectDir = file('examples')
